@@ -4,8 +4,8 @@ block content
 	h1 Vessels
 	ul
 	each val in portCalls
-		li= val.vessel.name
-
+		li 
+			a(href='/' + val.id)= val.vessel.name
 
 	h1 PORTCDM SUBMIT
 	form(class="firstForm")
@@ -28,6 +28,3 @@ block content
 		input(type="time", name="time", id="time_")
 		br
 		input(type="submit", name="submit", id="submitButton")
-	
-
-
