@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	h1 Process Steps
+	ul
+	each val in portCall.processSteps
+		li= val.definitionName
+		if (val.endTime !== null) 
+			p Finished 
+		else 
+			p Not finished
+
+	
+	h1 Submit PortCallMessage
+	form(action='/' + portCall.id, method='POST')
+		label(for='state') State
+		br
+		input(type='text', name='state') 
+		br
+		label(for='time_type') Timetype
+		br
+		select(, name='timeType')
+			option(value="ETA") ETA
+			option(value="ATA") ATA
+		br
+		label(for='datetime') Date
+		br
+		input(type='datetime-local', name='datetime')
+		br
+		input(type='hidden', name='vesselId', value=portCall.vessel.id)
+		input(type='submit', name="submit", id='submitButton')
