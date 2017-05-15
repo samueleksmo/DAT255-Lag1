@@ -11,21 +11,103 @@ block content
 			p Not finished
 
 	
-	h1 Submit PortCallMessage
+	h3 Submit cargo operation
 	form(action='/' + portCall.id, method='POST')
-		label(for='state') State
+		label(for='timeSequence') Time sequence
 		br
-		input(type='text', name='state') 
+		select(name='timeSequence', id='timeSequence')
+			option(value='COMMENCED') Commenced
+			option(value='COMPLETED') Completed
 		br
 		label(for='time_type') Timetype
 		br
-		select(, name='timeType')
-			option(value="ETA") ETA
-			option(value="ATA") ATA
+		select(name='timeType')
+			option(value="ESTIMATED") Estimated
+			option(value="ACTUAL") Actual
+			option(value="TARGET") Target
+			option(value="RECOMMENDED") Recommended
+		br
+		label(for='berth') Berth
+		br
+		input(type='text', name='berth')
+		br
+		label(for='datetime') Date
+		br
+		input(type='datetime-local', name='datetime')
+		br
+		input(type='hidden', name='serviceObject', value='CARGO_OPERATION')
+		input(type='hidden', name='vesselId', value=portCall.vessel.id)
+		input(type='hidden', name='state', value='serviceState')
+		input(type='submit', name="submit", id='submitButton')
+
+	h3 Submit ready-to-sail
+	form(action='/' + portCall.id, method='POST')
+		label(for='time_type') Timetype
+		br
+		select(name='timeType')
+			option(value="ESTIMATED") Estimated
+			option(value="ACTUAL") Actual
+			option(value="TARGET") Target
+			option(value="RECOMMENDED") Recommended
+		br
+		label(for='berth') Berth
+		br
+		input(type='text', name='berth')
+		br
+		label(for='datetime') Date
+		br
+		input(type='datetime-local', name='datetime')
+		br
+		input(type='hidden', name='serviceObject', value='DEPARTURE_BERTH')
+		input(type='hidden', name='timeSequence', value='COMPLETED')
+		input(type='hidden', name='vesselId', value=portCall.vessel.id)
+		input(type='hidden', name='state', value='serviceState')
+		input(type='submit', name="submit", id='submitButton')
+
+	h3 Submit slop operation
+	form(action='/' + portCall.id, method='POST')
+		label(for='timeSequence') Time sequence
+		br
+		select(name='timeSequence', id='timeSequence')
+			option(value='CONFIRMED') Confirm
+			option(value='DENIED') Deny
+		br
+		label(for='berth') Berth
+		br
+		input(type='text', name='berth')
+		br
+		label(for='datetime') Date
+		br
+		input(type='datetime-local', name='datetime')
+		br
+		input(type='hidden', name='serviceObject', value='SLOP_OPERATION')
+		input(type='hidden', name='timeType', value='ACTUAL')
+		input(type='hidden', name='vesselId', value=portCall.vessel.id)
+		input(type='hidden', name='state', value='serviceState')
+		input(type='submit', name="submit", id='submitButton')
+
+	h3 Submit departure or arrival
+	form(action='/' + portCall.id, method='POST')
+		select(name='serviceObject')
+			option(value="DEPARTURE") Departure
+			option(value="ARRIVAL") Arrival
+		br
+		label(for='timeType') Time type
+		br
+		select(name='timeType')
+			option(value="ESTIMATED") Estimated
+			option(value="ACTUAL") Actual
+			option(value="TARGET") Target
+			option(value="RECOMMENDED") Recommended
+		br
+		label(for='berth') Berth
+		br
+		input(type='text', name='berth')
 		br
 		label(for='datetime') Date
 		br
 		input(type='datetime-local', name='datetime')
 		br
 		input(type='hidden', name='vesselId', value=portCall.vessel.id)
+		input(type='hidden', name='state', value='locationState')
 		input(type='submit', name="submit", id='submitButton')
