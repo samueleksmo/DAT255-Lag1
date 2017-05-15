@@ -3,7 +3,8 @@ var router = express.Router();
 var http = require('http');
 
 var portCallsRequest = require('../portcdm_backend_requests/getPortCalls.js');
-var postRequest = require('../portcdm_backend_requests/postServiceState.js');
+var postServiceState = require('../portcdm_backend_requests/postServiceState.js');
+var postLocationState = require('../portcdm_backend_requests/postLocationState.js');
 
 router.get('/favicon.ico', function(req, res) {
     res.send(204);
@@ -15,7 +16,7 @@ router.get('/', function(req, res){
 
 router.get('/:id', function(req, res){
     	var options = {
-           host: '192.168.56.101',
+           host: 'dev.portcdm.eu',
     	   port: 8080,
     	   path: '/dmp/port_calls/' + req.params.id + '/',
     	   method: 'GET',
@@ -47,9 +48,18 @@ router.get('/:id', function(req, res){
 router.post('/:id', function(req, res){
     var datetime = new Date(req.body.datetime);
     //Change timezone from CET to UTC
-    datetime.setHours(datetime.getHours() - 1);
+    datetime.setHours(datetime.getHours() - 2);
     
-    postRequest.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, datetime);
+    if (req.body.state == 'serviceState') {
+        postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, datetime, req.body.serviceObject, 
+            req.body.timeSequence, req.body.berth);
+        if (req.body.serviceObject == 'SLOP_OPERATION')
+            postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, datetime, req.body.serviceObject, 
+                'REQUEST_RECEIVED', req.body.berth);
+    }          
+    else if (req.body.state == 'locationState')
+        postLocationState.postLocationState(req.params.id, req.body.vesselId, req.body.timeType, datetime, 
+                req.body.arrOrDep, req.body.berth);
     res.redirect('/');
 })
 
