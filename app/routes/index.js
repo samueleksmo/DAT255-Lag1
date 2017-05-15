@@ -3,6 +3,7 @@ var router = express.Router();
 var http = require('http');
 
 var portCallsRequest = require('../portcdm_backend_requests/getPortCalls.js');
+var portCallRequest = require('../portcdm_backend_requests/getPortCall.js'); 
 var postServiceState = require('../portcdm_backend_requests/postServiceState.js');
 var postLocationState = require('../portcdm_backend_requests/postLocationState.js');
 
@@ -15,34 +16,11 @@ router.get('/', function(req, res){
 });
 
 router.get('/:id', function(req, res){
-    	var options = {
-           host: 'dev.portcdm.eu',
-    	   port: 8080,
-    	   path: '/dmp/port_calls/' + req.params.id + '/',
-    	   method: 'GET',
-    	   headers: {
-    	       'X-PortCDM-Userid': 'viktoria',
-    	       'X-PortCDM-Password': 'vik123',
-    	       'X-PortCDM-APIKey': 'dhc',
-    	       'Content-Type': 'application/xml'
-    	   }
-	   };
 
-        http.get(options, function(serverRes) {
-
-            var bodyChunks = [];   
-
-            serverRes.on('data', function(chunk) {
-                bodyChunks += chunk;
-            });
-
-            serverRes.on('end', function() {
-                var body = JSON.parse(bodyChunks); 
-                res.render('portcall', { portCall: body });
-            });
-
-    }); 
-
+    portCallRequest.portCall(req.params.id, function(body) {
+        res.render('portcall', { portCall: body });
+    })
+    
 });
 
 router.post('/:id', function(req, res){
