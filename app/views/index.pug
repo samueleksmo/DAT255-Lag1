@@ -1,39 +1,21 @@
 extends layout
 
-block content
-	header
-		div(class='center')
-			div(class='menue')
-				a(href='http://localhost:3000/' class='DASHBOARD') SILJALINE
-					img(class='icons') 		
-				a(href='https://dev.portcdm.eu/port/home'  class='DASHBOARD2') PORTCDM
-					img(class='icons2') 			
+block content 			
 	div(class='home')
 		div(class='center')
-			h1 Vessels
-			ul
-			each val in portCalls
-				li 
-					a(href='/' + val.id)= val.vessel.name
+			h1 Port calls
+			if portCalls.length == 0
+				p There are currently no portcalls
+			else
+				ul
+				each val in portCalls
+					li 
+						a(href='/' + val.portCallId)= val.portCallId
 
-			h1 PORTCDM SUBMIT
-			form(class='firstForm')
-				label(for'P_id') PortCallID
+			h2 Add a new port call
+			form(action='/', method='POST')
+				label(for='pid') Port call id
 				br
-				input(type='number', name='portCallId', id='P_id') 
+				input(type='text', name='pid') 
 				br
-				label(for'state') State
-				br
-				input(type='text', id='state') 
-				br
-				label(for'time_type') Timetype
-				br
-				select(, name='timeType', id='time_type')
-					option(value='ETA') ETA
-					option(value='ATA') ATA
-				br
-				label(for'time_') Time
-				br
-				input(type='time', name='time', id='time_')
-				br
-				input(type='submit', name='submit', id='submitButton')
+				input(type='submit', name="submit", id='submitButton')
