@@ -1,21 +1,11 @@
-var http = require("http");
+var http = require('http');
+var options = require('./options.js');
 
 //hämtar meddelanden för en viss kö, genom att skicka med queueId för ett visst anlöp
-exports.newQueueMessages = function(id) {
-var options = {
-    host: 'dev.portcdm.eu',
-    port: 8080,
-    path: '/mb/mqs/'+ id,
-    method: 'GET',
-    headers: {
-        'X-PortCDM-Userid': 'viktoria',
-        'X-PortCDM-Password': 'vik123',
-        'X-PortCDM-APIKey': 'dhc',
-    }
-};
+exports.newQueueMessages = function(qId, callback) {
 
 
-var req = http.get(options, function(res) {
+var req = http.get(options.setOptions('/mb/mqs/'+ qId, 'GET', 'application/xml'), function(res) {
 
   var bodyChunks = [];
 
@@ -27,9 +17,8 @@ var req = http.get(options, function(res) {
 
   res.on('end', function() {
     
-    
-      console.log(bodyChunks);
-      return bodyChunks;
+      callback(bodyChunks);
+
     });
 
    });

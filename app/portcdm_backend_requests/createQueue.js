@@ -1,38 +1,31 @@
-var http = require("http");
+var http = require('http');
+var options = require('./options.js');
 
-
-//Skapar ny kö genom att skicka med ett portCallId, returnerar ett queueId i callbackfunktionen
-exports.newQueue = function(id, callback) {
-var body = '[' +
-  '{' +
-    '"type": "PORT_CALL",' +
-    '"element": "' + id +
+//Skapar ny kö genom att skcika med ett portCallId, returnerar ett queueId
+exports.newQueue = function(pId, callback) {
+ var body = '[' +
+    '{' +
+      '"type": "PORT_CALL",' +
+      '"element": "' + pId +
     '"}'+
   ']';
 
-var options = {
-    host: 'dev.portcdm.eu',
-    port: 8080,
-    path: '/mb/mqs/',
-    method: 'POST',
-    headers: {
-        'X-PortCDM-Userid': 'viktoria',
-        'X-PortCDM-Password': 'vik123',
-        'X-PortCDM-APIKey': 'dhc',
-        'Content-Type': 'application/JSON'
-  }
-};
-
-
-var req = http.request(options, function(serverRes){   
+var req = http.request(options.setOptions('/mb/mqs/', 'POST', 'application/json'), function(res) {
     var bodyChunks = [];
-    console.log(serverRes.statusCode);
-    serverRes.on('data', function(chunk) {
+    console.log(res.statusCode);
+    
+    res.on('data', function(chunk) {
       bodyChunks += chunk;
-      callback(bodyChunks);
     });
+
+  res.on('end', function() { 
+    callback(bodyChunks);
+  });
+
 });
-  req.write(body);
-  req.end();
+
+req.write(body);
+req.end();
+
 
 };
