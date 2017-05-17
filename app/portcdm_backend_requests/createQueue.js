@@ -1,13 +1,14 @@
 var http = require("http");
 
-//Skapar ny kö genom att skcika med ett portCallId, returnerar ett queueId
-exports.newQueue = function(id) {
+
+//Skapar ny kö genom att skicka med ett portCallId, returnerar ett queueId i callbackfunktionen
+exports.newQueue = function(id, callback) {
 var body = '[' +
   '{' +
     '"type": "PORT_CALL",' +
     '"element": "' + id +
-  '"}'+
-']';
+    '"}'+
+  ']';
 
 var options = {
     host: 'dev.portcdm.eu',
@@ -19,19 +20,19 @@ var options = {
         'X-PortCDM-Password': 'vik123',
         'X-PortCDM-APIKey': 'dhc',
         'Content-Type': 'application/JSON'
-      }
+  }
 };
 
-var req = http.request(options, function(res) {
+
+var req = http.request(options, function(serverRes){   
     var bodyChunks = [];
-    console.log(res.statusCode);
-    res.on('data', function(chunk) {
-    bodyChunks += chunk;
-    return bodyChunks;
-  });
+    console.log(serverRes.statusCode);
+    serverRes.on('data', function(chunk) {
+      bodyChunks += chunk;
+      callback(bodyChunks);
+    });
+});
+  req.write(body);
+  req.end();
 
-  });
-
-req.write(body);
-req.end();
 };
