@@ -1,7 +1,16 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(type='text/javascript', src='/javascripts/jquery-2.1.4.min.js')
+		script(type='text/javascript', src='/javascripts/script.js')
+	body
+		header
+			div(class='center')
+				div(class='menue')
+					a(href='/' class='DASHBOARD') SILJALINE
+						img(class='icons') 		
+					a(href='https://dev.portcdm.eu/port/home', class='DASHBOARD2') PORTCDM
+						img(class='icons2')
+		block content
