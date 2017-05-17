@@ -1,11 +1,123 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /**
+    * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+    * http://cssreset.com
+    */
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+    display: block;
+    }
+    body {
+    line-height: 1;
+    }
+    ol, ul {
+    list-style: none;
+    }
+    blockquote, q {
+    quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+    content: '';
+    content: none;
+    }
+    table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+
+html, body {
+    height: 100%;
+    margin: 0;
+  	font-size: 14px;
+    font-family:  "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+header {
+	height: 64px;
+	background-color: rgba(0,46,81,100); 
+    display: fixed;
 }
+
+.center {
+    display: block;
+    margin: 0 auto;
+    width: 940px;
+}
+
+h1 {
+	font-family: helvetica;
+	font-size: 34px;
+}
+.menue {
+    padding-top: 24px;
+}
+
+
+a {
+    text-decoration: none;
+    font-style: normal;
+    color: #00B7FF;
+    
+}
+
+img{
+    
+}
+
+.DASHBOARD {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-family: helvetica;
+    font-weight: 200;
+    font-size: 31px;
+}
+.DASHBOARD2 {
+    margin-bottom: 5px;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-family: helvetica;
+    font-weight: 200;
+    font-size: 31px;
+    float: right;
+}
+.icons{
+    content:url("pictures/DashBoard.svg");
+    float: left;
+}
+.icons2{
+    content:url("pictures/Ship.svg");
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: -5px;
+
+}
+
 input {
 	border-width: 1px;
 	border-color: black;

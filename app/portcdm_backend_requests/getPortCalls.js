@@ -1,7 +1,7 @@
 var http = require("http");
 
 var options = {
-    host: '192.168.56.101',
+    host: 'dev.portcdm.eu',
     port: 8080,
     path: '/dmp/port_calls/',
     method: 'GET',
