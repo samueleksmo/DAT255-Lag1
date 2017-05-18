@@ -12,7 +12,6 @@ var body = '<?xml version="1.0" encoding="UTF-8"?>' +
    '<ns2:portCallId>' + portCallId + '</ns2:portCallId>' +
    '<ns2:vesselId>' + vesselId + '</ns2:vesselId>' +
    '<ns2:messageId>urn:x-mrn:stm:portcdm:message:' + uuidV4() + '</ns2:messageId>' +
-   //Ska vara nutid
    '<ns2:reportedAt>' + date + '</ns2:reportedAt>' +
    '<ns2:serviceState>' +
       '<ns2:serviceObject>' + serviceObject + '</ns2:serviceObject>' +
@@ -25,7 +24,7 @@ var body = '<?xml version="1.0" encoding="UTF-8"?>' +
       '</ns2:at>' +
    '</ns2:serviceState>' +
 '</ns2:portCallMessage>';
-
+console.dir(body);
 var req = http.request(options.setOptions('/dmp/mss/state_update', 'POST', 'application/xml'), function(res)    {
     console.log(res.statusCode);
     console.log(res.statusMessage);
