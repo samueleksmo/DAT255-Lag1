@@ -3,14 +3,10 @@ extends layout
 block content
 	div(class='portCall')
 		div(class='center')
-			h1 Process Steps
-			ul
-			each val in portCall.processSteps
-				li= val.definitionName
-				if (val.endTime !== null) 
-					p Finished 
-				else 
-					p Not finished
+			h1 #{portCall.vessel.name}
+			h2 Port call messages
+			p= JSON.stringify(messages)
+				
 			br
 			h2 Submit cargo operation
 			form(action='/' + portCall.id, method='POST')
@@ -76,10 +72,6 @@ block content
 				label(for='berth') Berth
 				br
 				input(type='text', name='berth')
-				br
-				label(for='datetime') Date
-				br
-				input(type='datetime-local', name='datetime')
 				br
 				input(type='hidden', name='serviceObject', value='SLOP_OPERATION')
 				input(type='hidden', name='timeType', value='ACTUAL')
