@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var parseString = require('xml2js').parseString;
 
 var portCallRequest = require('../portcdm_backend_requests/getPortCall.js'); 
 var postServiceState = require('../portcdm_backend_requests/postServiceState.js');
@@ -34,8 +35,10 @@ router.get('/:id', function(req, res){
     
     portCallRequest.portCall(req.params.id, function(portCallBody) {
             getQueueId.getQueueId(req.params.id, function(queueId){
-                getQueueMessages.newQueueMessages(queueId, function(messages){
-                    res.render('portcall', { queueId: queueId, portCall: portCallBody, messages: messages });
+                getQueueMessages.newQueueMessages(queueId, function(xmlMessages){
+                    queueMessagesToJs(xmlMessages, function(jsonMessages) {
+                        res.render('portcall', { portCall: portCallBody, messages: jsonMessages });
+                    })
                 })
             })
         })
@@ -65,5 +68,22 @@ router.post('/:id', function(req, res){
     
     res.redirect('/' + req.params.id);
 })
+
+//Turn xml messages from the queue into js
+function queueMessagesToJs(xml, callback) {
+    
+    var xmlSlice = xml.slice(120, -13);  
+    var result = [];
+    
+    while (xmlSlice !== "") {
+        parseString(xmlSlice, function (err, result1) {
+            result.push(result1);     
+        });
+
+        xmlSlice = xmlSlice.slice(xmlSlice.indexOf('</ns2:portCallMessage>') + '</ns2:portCallMessage>'.length);
+
+    }
+callback(result);
+}
 
 module.exports = router;
