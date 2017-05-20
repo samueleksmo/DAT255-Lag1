@@ -3,26 +3,45 @@ extends layout
 block content
 	div(class='portCall')
 		div(class='center')
+			h1 #{portCall.vessel.name}
 			div(class='listOfPCM')
 				h2 LATSET PORTCALLMESSAGE
 				div(class='latestPCM')
-					ul 
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
-						li(class='MSG') mmadmakfmakfmfkmm mdafmkfmskamfdkoadkdkeokfmafmlkflfnlfn
+					ul 					
+						- for (var i = 0; i < messages.length; i++) {
+							- var msg = messages[i]
+							- var pcm = msg['ns2:portCallMessage']
+							- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
+								- var state = pcm['ns2:serviceState'][0]
+								- if (typeof state['ns2:at'] !== 'undefined')
+									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']}
+								- else {
+									- var between = state['ns2:between'][0]
+									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']}
+								- }
+							- }
+							- else {
+								- var state = pcm['ns2:locationState'][0]
+								- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
+									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
+								- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
+									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
+								- } else {
+									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+									li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']}
+								- }
+							- }					
+						- }
+			br
 			div(class='allInfo')
 				h2(class='Allh2') ALL INFO
 				div(class='PCM') Här kommer hela PCM antar jag.
 
-			h1 #{portCall.vessel.name}
 			h2 Port call messages
 			p= JSON.stringify(messages)
-				
 			br
 			h2 Submit cargo operation
 			form(action='/' + portCall.id, method='POST')
