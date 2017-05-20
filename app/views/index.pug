@@ -19,3 +19,25 @@ block content
 				input(type='text', name='pid') 
 				br
 				input(type='submit', name="submit", id='submitButton')
+
+			div(class='center')
+			h1 30 Latest PortCalls
+			if portCalls.length == 0
+				p There are currently no portcalls
+			else
+				ul
+				each val in portCalls30
+					li 
+
+						a #{val.vessel.name}:
+						br
+						| #{    val.id} 
+						br
+						br
+						
+
+						
+
+						 
+						
+
