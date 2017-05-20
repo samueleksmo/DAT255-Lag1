@@ -9,7 +9,10 @@ var createQueue = require('../portcdm_backend_requests/createQueue.js');
 var getQueueMessages = require('../portcdm_backend_requests/getQueueMessages.js');
 var getPortCalls = require('../db_requests/getOurPortcalls.js');
 var insertPortCall = require('../db_requests/insertNewPortcall.js');
+var insertPortCallMessage = require('../db_requests/insertPortCallMessage.js')
 var getQueueId = require('../db_requests/getQueueId.js');
+var getPortcallMessages = require('../db_requests/getPortcallMessages.js');
+
 
 
 router.get('/favicon.ico', function(req, res) {
@@ -36,8 +39,10 @@ router.get('/:id', function(req, res){
     portCallRequest.portCall(req.params.id, function(portCallBody) {
             getQueueId.getQueueId(req.params.id, function(queueId){
                 getQueueMessages.newQueueMessages(queueId, function(xmlMessages){
-                    queueMessagesToJs(xmlMessages, function(jsonMessages) {
-                        res.render('portcall', { portCall: portCallBody, messages: jsonMessages });
+                    queueMessagesToJs(xmlMessages, req.params.id, function(jsonMessages) {
+                        getPortcallMessages.getPCM(req.params.id, function(oldMessages) {
+                            res.render('portcall', { portCall: portCallBody, messages: jsonMessages, oldMessages: oldMessages });
+                        })
                     })
                 })
             })
@@ -69,15 +74,16 @@ router.post('/:id', function(req, res){
     res.redirect('/' + req.params.id);
 })
 
-//Turn xml messages from the queue into js
-function queueMessagesToJs(xml, callback) {
+//Turn xml messages from the queue into js and puts them in the database
+function queueMessagesToJs(xml, portCallId, callback) {
     
     var xmlSlice = xml.slice(120, -13);  
     var result = [];
     
     while (xmlSlice !== "") {
         parseString(xmlSlice, function (err, result1) {
-            result.push(result1);     
+            result.push(result1);
+            insertPortCallMessage.insertOneItem(portCallId, result1);   
         });
 
         xmlSlice = xmlSlice.slice(xmlSlice.indexOf('</ns2:portCallMessage>') + '</ns2:portCallMessage>'.length);
