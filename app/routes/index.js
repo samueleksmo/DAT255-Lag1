@@ -12,6 +12,7 @@ var insertPortCall = require('../db_requests/insertNewPortcall.js');
 var insertPortCallMessage = require('../db_requests/insertPortCallMessage.js')
 var getQueueId = require('../db_requests/getQueueId.js');
 var getPortcallMessages = require('../db_requests/getPortcallMessages.js');
+var portCall30Request = require('../portcdm_backend_requests/getPortCall30.js');
 
 
 
@@ -20,11 +21,11 @@ router.get('/favicon.ico', function(req, res) {
 });
 
 router.get('/', function(req, res){
-  
-  getPortCalls.getAllOurPortcalls(function(body){
-    res.render('index', { portCalls: body });
-  })
-  
+  portCall30Request.portCall30(function(body1){
+  getPortCalls.getAllOurPortcalls(function(body2){
+    res.render('index', { portCalls30: body1, portCalls: body2 });    
+  });
+  });
 });
 
 router.post('/', function(req, res){
