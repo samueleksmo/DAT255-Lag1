@@ -11,6 +11,8 @@ var body = '<?xml version="1.0" encoding="UTF-8"?>' +
    '<ns2:vesselId>'+vesselId+'</ns2:vesselId>' +
    '<ns2:messageId>urn:mrn:stm:portcdm:message:' + uuidV4() + '</ns2:messageId>' +
    '<ns2:reportedAt>'+d.toISOString()+'</ns2:reportedAt>' +
+   '<ns2:reportedBy> Terminal 1 SiljaLine </ns2:reportedBy>' +
+   '<ns2:comment>' +comment+ '</ns2:comment>' +
    '<ns2:serviceState>' +
       '<ns2:serviceObject>'+ serviceObject +'</ns2:serviceObject>' +
       '<ns2:timeSequence>' + timeSequence + '</ns2:timeSequence>' +

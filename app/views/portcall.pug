@@ -14,10 +14,10 @@ block content
 							- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
 								- var state = pcm['ns2:serviceState'][0]
 								- if (typeof state['ns2:at'] !== 'undefined')
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']}
+									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
 								- else {
 									- var between = state['ns2:between'][0]
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']}
+									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
 								- }
 							- }
 							- else {
@@ -28,10 +28,10 @@ block content
 									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
 								- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
 									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
+									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
 								- } else {
 									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']}
+									li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
 								- }
 							- }					
 						- }
@@ -96,6 +96,10 @@ block content
 				br
 				input(type='datetime-local', name='datetime')
 				br
+				label(for='comment') Comment
+				br
+				input(type='text', name='comment')
+				br
 				input(type='hidden', name='serviceObject', value='CARGO_OPERATION')
 				input(type='hidden', name='vesselId', value=portCall.vessel.id)
 				input(type='hidden', name='state', value='serviceState')
@@ -119,6 +123,10 @@ block content
 				br
 				input(type='datetime-local', name='datetime')
 				br
+				label(for='comment') Comment
+				br
+				input(type='text', name='comment')
+				br
 				input(type='hidden', name='serviceObject', value='DEPARTURE_BERTH')
 				input(type='hidden', name='timeSequence', value='COMPLETED')
 				input(type='hidden', name='vesselId', value=portCall.vessel.id)
@@ -136,6 +144,10 @@ block content
 				label(for='berth') Berth
 				br
 				input(type='text', name='berth')
+				br
+				label(for='comment') Comment
+				br
+				input(type='text', name='comment')
 				br
 				input(type='hidden', name='serviceObject', value='SLOP_OPERATION')
 				input(type='hidden', name='timeType', value='ACTUAL')
@@ -164,6 +176,10 @@ block content
 				label(for='datetime') Date
 				br
 				input(type='datetime-local', name='datetime')
+				br
+				label(for='comment') Comment
+				br
+				input(type='text', name='comment')
 				br
 				input(type='hidden', name='vesselId', value=portCall.vessel.id)
 				input(type='hidden', name='state', value='locationState')
