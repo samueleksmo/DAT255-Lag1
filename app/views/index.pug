@@ -21,19 +21,21 @@ block content
 					br
 					input(type='submit', name="submit", id='submitButton')
 			div(class='latestCalls')
-				h1 30 Latest PortCalls
-				if portCalls30.length == 0
-					p There are currently no portcalls
-				else
-					ul
-					each val in portCalls30
-						li 
+	      div(class='center')
+          h1 30 Latest PortCalls
+          if portCalls30.length == 0
+            p There are currently no portcalls
+          else
+            ul
+            each val in portCalls30
+              li 
 
-							a #{val.vessel.name}:
-							br
-							| #{    val.id}
-							br
-							br
+                p #{val.vessel.name}:
+                br
+                | #{    val.id}
+                br
+                br
+
 						
 
 						
