@@ -3,37 +3,39 @@ extends layout
 block content 			
 	div(class='home')
 		div(class='center')
-			h1 Port calls
-			if portCalls.length == 0
-				p There are currently no portcalls
-			else
-				ul
-				each val in portCalls
-					li 
-						a(href='/' + val.portCallId)= val.portCallId
+			div(class='addPortID')
+				h1 Port calls
+				if portCalls.length == 0
+					p There are currently no portcalls
+				else
+					ul
+					each val in portCalls
+						li 
+							a(href='/' + val.portCallId)= val.portCallId
 
-			h2 Add a new port call
-			form(action='/', method='POST')
-				label(for='pid') Port call id
-				br
-				input(type='text', name='pid') 
-				br
-				input(type='submit', name="submit", id='submitButton')
+				h2 Add a new port call
+				form(action='/', method='POST')
+					label(for='pid') Port call id
+					br
+					input(type='text', name='pid') 
+					br
+					input(type='submit', name="submit", id='submitButton')
+			div(class='latestCalls')
+	      div(class='center')
+          h1 30 Latest PortCalls
+          if portCalls30.length == 0
+            p There are currently no portcalls
+          else
+            ul
+            each val in portCalls30
+              li 
 
-			div(class='center')
-			h1 30 Latest PortCalls
-			if portCalls30.length == 0
-				p There are currently no portcalls
-			else
-				ul
-				each val in portCalls30
-					li 
+                p #{val.vessel.name}:
+                br
+                | #{    val.id}
+                br
+                br
 
-						a #{val.vessel.name}:
-						br
-						| #{    val.id}
-						br
-						br
 						
 
 						

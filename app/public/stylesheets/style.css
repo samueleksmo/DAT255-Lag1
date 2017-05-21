@@ -60,11 +60,26 @@ header {
 }
 
 .home{
-    background: url("pictures/Background.jpg");
+    background: url("pictures/3Boats.jpg");
     background-size: cover;
     height: 100vh;
 }
+.addPortID {
+    margin-top: 44px;
+    float: left; 
+    width: 470px;
+}
+.latestCalls {
+    margin-top: 44px;
+    float: right;
+    width: 470px;
+}
 
+
+.portCall{
+    background: url("pictures/boatBG.jpg");
+    background-size: cover;
+}
 .center {
     display: block;
     margin: 0 auto;
@@ -72,9 +87,16 @@ header {
     overflow: hidden;
 }
 
+.centerBig {
+    display: block;
+    margin: 0 auto;
+    width: 1240px;
+    overflow: hidden;
+}
+
 .listOfPCM {
       width: 470px;
-      float: left;
+      float: right;
       margin-top: 44px;
 }
 .allInfo {
@@ -157,7 +179,7 @@ a {
 .PCM{
     height: 300px;
     width: 470px;
-    background-color: blue;
+    background-color: white;
     border-radius: 5px;
     padding-top: 5px;
     float: right;
@@ -192,9 +214,24 @@ a {
     height: 300px;
 }
 
+
+
 ul {
     margin-top: 10px; 
 }
+.allOperations{
+    margin-top: 44px;
+    background-color: #F5F5F5;
+    float: left;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.operation {
+
+    margin-top: 10px;
+}
+
 
 input {
     border-width: 1px;
