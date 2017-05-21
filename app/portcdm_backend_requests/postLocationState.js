@@ -22,13 +22,15 @@ function arrivalOrDeparture(arrOrDep, berth) {
 var d = new Date();
 d.setHours(d.getHours() - 2);
 
-exports.postLocationState = function(portCallId, vesselId, timeType, datetime, arrOrDep, berth) {
+exports.postLocationState = function(portCallId, vesselId, timeType, datetime, arrOrDep, berth, comment) {
 var body = '<?xml version="1.0" encoding="UTF-8"?>' +
 '<ns2:portCallMessage xmlns:ns2="urn:mrn:stm:schema:port-call-message:0.6">' +
    '<ns2:portCallId>'+portCallId+'</ns2:portCallId>' +
    '<ns2:vesselId>'+vesselId+'</ns2:vesselId>' +
    '<ns2:messageId>urn:mrn:stm:portcdm:message:' + uuidV4() + '</ns2:messageId>' +
    '<ns2:reportedAt>'+d.toISOString()+'</ns2:reportedAt>' +
+   '<ns2:reportedBy> Terminal 1 SiljaLine </ns2:reportedBy>' +
+   '<ns2:comment>' +comment+ '</ns2:comment>' +
    '<ns2:locationState>' +
    '<ns2:referenceObject>VESSEL</ns2:referenceObject>' +
       '<ns2:time>'+datetime.toISOString()+'</ns2:time>' +

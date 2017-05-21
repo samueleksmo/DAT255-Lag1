@@ -59,18 +59,18 @@ router.post('/:id', function(req, res){
 
     if (req.body.serviceObject == 'SLOP_OPERATION') {
         postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, new Date(), req.body.serviceObject, 
-            'REQUEST_RECEIVED', req.body.berth);
+            'REQUEST_RECEIVED', req.body.berth, req.body.comment);
         postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, new Date(), req.body.serviceObject, 
-            req.body.timeSequence, req.body.berth);
+            req.body.timeSequence, req.body.berth, req.body.comment);
     } 
 
     else if (req.body.state == 'serviceState')
         postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, datetime, req.body.serviceObject, 
-            req.body.timeSequence, req.body.berth);
+            req.body.timeSequence, req.body.berth, req.body.comment);
 
     else if (req.body.state == 'locationState')
         postLocationState.postLocationState(req.params.id, req.body.vesselId, req.body.timeType, datetime, 
-                req.body.serviceObject, req.body.berth);
+                req.body.serviceObject, req.body.berth, req.body.comment);
     
     res.redirect('/' + req.params.id);
 })
