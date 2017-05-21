@@ -2,7 +2,7 @@ var http = require('http');
 const uuidV4 = require('uuid/v4');
 var options = require('./options.js');
 
-exports.postServiceState = function(portCallId, vesselId, timeType, datetime, serviceObject, timeSequence, berth) {
+exports.postServiceState = function(portCallId, vesselId, timeType, datetime, serviceObject, timeSequence, berth, comment) {
   var d = new Date();
 d.setHours(d.getHours() - 2);
 var body = '<?xml version="1.0" encoding="UTF-8"?>' +
