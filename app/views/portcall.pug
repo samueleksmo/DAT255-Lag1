@@ -38,6 +38,40 @@ block content
 						input(type='hidden', name='state', value='serviceState')
 						input(type='submit', name="submit", id='submitButton')
 
+				div(class='bunkering' class='operation')
+					h2 Bunker operation
+					form(action='/' + portCall.id, method='POST' class='bunkeringForm')
+						label(for='timeSequence') Time sequence
+						br
+						select(name='timeSequence', id='timeSequence')
+							option(value='COMMENCED') Commenced
+							option(value='COMPLETED') Completed
+						br
+						label(for='time_type') Timetype
+						br
+						select(name='timeType')
+							option(value="ESTIMATED") Estimated
+							option(value="ACTUAL") Actual
+							option(value="TARGET") Target
+							option(value="RECOMMENDED") Recommended
+						br
+						label(for='berth') Berth
+						br
+						input(type='text', name='berth')
+						br
+						label(for='datetime') Date
+						br
+						input(type='datetime-local', name='datetime')
+						br
+						label(for='comment') Comment
+						br
+						input(type='text', name='comment')
+						br
+						input(type='hidden', name='serviceObject', value='BUNKERING_OPERATION')
+						input(type='hidden', name='vesselId', value=portCall.vessel.id)
+						input(type='hidden', name='state', value='serviceState')
+						input(type='submit', name="submit", id='submitButton')
+
 				div(class='rdyToSailOperation' class='operation')
 					h2 Ready-to-sail
 					form(action='/' + portCall.id, method='POST')
