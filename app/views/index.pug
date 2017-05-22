@@ -22,20 +22,26 @@ block content
 					input(type='submit', name="submit", id='submitButton')
 
 			div(class='latestCalls')
-		
-					div(class='center')
-						h1 30 Latest PortCalls
-						if portCalls30.length == 0
-							p There are currently no portcalls
-						else
-							ul
+				h1 30 Latest PortCalls
+				div(class='listOfvesselID')
+					if portCalls30.length == 0
+						p There are currently no portcalls
+					else
+						ul
 							each val in portCalls30
-								li
-									p #{val.vessel.name}:
-									br
-									| #{    val.id}
-									br
-									br
+								li(class='vesselID')
+									h5 #{val.vessel.name}
+									| #{val.id}
+	footer(class='footer')
+		div(class='center')
+			div(class='contact')
+				h5 Terminal Siljaline
+				p DAT255 2017
+				a(href='https://github.com/hburden/DAT255' class='gitLink') GitHub/SiljaLine
+			div(class='contactRight')
+				img(class='iconsChalmers')
+				img(class='inconsWheel')
+
 
 						
 
