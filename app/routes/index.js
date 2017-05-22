@@ -30,7 +30,7 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
     createQueue.newQueue(req.body.pid, function(qid){
-        insertPortCall.insertOneItem(req.body.pid, qid);
+        insertPortCall.insertOneItem(req.body.pid, qid, req.body.vname);
     })
     res.redirect('/');
 });
@@ -54,7 +54,7 @@ router.get('/:id', function(req, res){
 router.post('/:id', function(req, res){
     var datetime = new Date(req.body.datetime);
     //Change timezone from CET to UTC
-    datetime.setHours(datetime.getHours() - 2);
+    datetime.setHours(datetime.getHours());
     
 
     if (req.body.serviceObject == 'SLOP_OPERATION') {

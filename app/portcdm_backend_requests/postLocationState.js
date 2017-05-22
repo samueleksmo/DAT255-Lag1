@@ -20,7 +20,7 @@ function arrivalOrDeparture(arrOrDep, berth) {
 }
 
 var d = new Date();
-d.setHours(d.getHours() - 2);
+d.setHours(d.getHours());
 
 exports.postLocationState = function(portCallId, vesselId, timeType, datetime, arrOrDep, berth, comment) {
 var body = '<?xml version="1.0" encoding="UTF-8"?>' +

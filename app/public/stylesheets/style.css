@@ -138,6 +138,12 @@ h2 {
 
     margin-top: 44px;
 }
+h3 {   
+    font-weight: bold;
+    font-family: helvetica;
+    font-size: 18px;
+
+}
 
 h3 {
     font-family: helvetica;
@@ -306,6 +312,7 @@ select {
     border-color: black;
 }
 
+
 .vesselID {
 margin-top: 10px;
 margin-right: 5px;
@@ -332,5 +339,4 @@ footer {
     margin-right: 384px;
     margin-top: 34px;
     float: right;
-
 }
