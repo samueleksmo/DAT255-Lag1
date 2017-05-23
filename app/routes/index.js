@@ -13,6 +13,9 @@ var insertPortCallMessage = require('../db_requests/insertPortCallMessage.js')
 var getQueueId = require('../db_requests/getQueueId.js');
 var getPortcallMessages = require('../db_requests/getPortcallMessages.js');
 var portCall30Request = require('../portcdm_backend_requests/getPortCall30.js');
+var insertNote = require('../db_requests/insertNote.js');
+var getNote = require('../db_requests/getNote.js');
+var deleteItem = require('../db_requests/deletePortcall.js');
 
 
 
@@ -42,7 +45,9 @@ router.get('/:id', function(req, res){
                 getQueueMessages.newQueueMessages(queueId, function(xmlMessages){
                     queueMessagesToJs(xmlMessages, req.params.id, function(jsonMessages) {
                         getPortcallMessages.getPCM(req.params.id, function(oldMessages) {
-                            res.render('portcall', { portCall: portCallBody, messages: jsonMessages, oldMessages: oldMessages });
+                            getNote.getNote(req.params.id, function(note){
+                                res.render('portcall', { portCall: portCallBody, messages: jsonMessages, oldMessages: oldMessages, note: note });
+                            })
                         })
                     })
                 })
@@ -56,6 +61,9 @@ router.post('/:id', function(req, res){
     //Change timezone from CET to UTC
     datetime.setHours(datetime.getHours());
     
+    if (req.body.state == 'note') {
+        insertNote.insertOneItem(req.params.id, req.body.note);
+    }
 
     if (req.body.serviceObject == 'SLOP_OPERATION') {
         postServiceState.postServiceState(req.params.id, req.body.vesselId, req.body.timeType, new Date(), req.body.serviceObject, 
@@ -75,8 +83,13 @@ router.post('/:id', function(req, res){
     res.redirect('/' + req.params.id);
 })
 
+router.delete('/:id', function(req,res){
+    deleteItem.deleteOneItem(req.params.id);
+    res.redirect('/');
+})
+
 //Turn xml messages from the queue into js and puts them in the database
-function queueMessagesToJs(xml, portCallId, callback) {
+function queueMessagesToJs(xml, portcallid, callback) {
     
     var xmlSlice = xml.slice(120, -13);  
     var result = [];
@@ -84,7 +97,7 @@ function queueMessagesToJs(xml, portCallId, callback) {
     while (xmlSlice !== "") {
         parseString(xmlSlice, function (err, result1) {
             result.push(result1);
-            insertPortCallMessage.insertOneItem(portCallId, result1);   
+            insertPortCallMessage.insertOneItem(portcallid, result1);   
         });
 
         xmlSlice = xmlSlice.slice(xmlSlice.indexOf('</ns2:portCallMessage>') + '</ns2:portCallMessage>'.length);

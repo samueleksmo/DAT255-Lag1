@@ -11,7 +11,9 @@ block content
 					ul
 					each val in portCalls
 						li 
-							a(href='/' + val.portCallId)= val.portCallId
+							a(href='/' + val.portcallid) #{val.portcallid}
+							br
+							a(href='#', class='deletePortcall', data-id=val.portcallid) Delete
 
 				h2 Add a new port call
 				form(action='/', method='POST')

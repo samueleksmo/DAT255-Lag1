@@ -24,8 +24,6 @@ var body = '<?xml version="1.0" encoding="UTF-8"?>' +
    '</ns2:serviceState>' +
 '</ns2:portCallMessage>';
 
-console.log(body);
-
 
 var req = http.request(options.setOptions('/mb/mss', 'POST', 'application/xml'), function(res)    {
     console.log(res.statusCode);
