@@ -4,18 +4,18 @@ block content
 	div(class='home')
 		div(class='center')
 			div(class='addPortID')
-				h1 Port calls
+				h1 Added port calls
 				if portCalls.length == 0
 					p There are currently no portcalls
 				else
-					ul
+					ul(class='addedPortcalls')
 						each val in portCalls
 							li 
-								p #{val.vesselName}
+								br
+								h5(class='vesselID') #{val.vesselName}
 								a(href='/' + val.portcallid)= val.portcallid
 								br
 								a(href='#', class='deletePortcall', data-id=val.portcallid) Delete
-								br
 								br
               
 				h2 Add a new port call
