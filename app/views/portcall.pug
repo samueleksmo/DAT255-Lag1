@@ -3,123 +3,128 @@ extends layout
 block content
 	div(class='portCall')
 		div(class='centerBig')
+			h1(class='boatName') #{portCall.vessel.name}
 			div(class='allOperations')
-				div(class='cargo' class='operation')
-					h2 Cargo operation
-					form(action='/' + portCall.id, method='POST' class='cargoForm')
-						label(for='timeSequence') Time sequence
-						br
-						select(name='timeSequence', id='timeSequence')
-							option(value='COMMENCED') Commenced
-							option(value='COMPLETED') Completed
-						br
-						label(for='time_type') Timetype
-						br
-						select(name='timeType')
-							option(value="ESTIMATED") Estimated
-							option(value="ACTUAL") Actual
-							option(value="TARGET") Target
-							option(value="RECOMMENDED") Recommended
-						br
-						label(for='berth') Berth
-						br
-						input(type='text', name='berth')
-						br
-						label(for='datetime') Date
-						br
-						input(type='datetime-local', name='datetime')
-						br
-						label(for='comment') Comment
-						br
-						input(type='text', name='comment')
-						br
-						input(type='hidden', name='serviceObject', value='CARGO_OPERATION')
-						input(type='hidden', name='vesselId', value=portCall.vessel.id)
-						input(type='hidden', name='state', value='serviceState')
-						input(type='submit', name="submit", id='submitButton')
+				h2(id='operationsh2') OPERATIONS 
+				div(class='containerOperations')
+					div(class='cargo' class='operation')
+						h3 Cargo operation
+						form(action='/' + portCall.id, method='POST' class='cargoForm')
+							label(for='timeSequence') Time sequence
+							br
+							select(name='timeSequence', id='timeSequence')
+								option(value='COMMENCED') Commenced
+								option(value='COMPLETED') Completed
+							br
+							label(for='time_type') Timetype
+							br
+							select(name='timeType')
+								option(value="ESTIMATED") Estimated
+								option(value="ACTUAL") Actual
+								option(value="TARGET") Target
+								option(value="RECOMMENDED") Recommended
+							br
+							label(for='berth') Berth
+							br
+							input(type='text', name='berth')
+							br
+							label(for='datetime') Date
+							br
+							input(type='datetime-local', name='datetime')
+							br
+							label(for='comment') Comment
+							br
+							input(type='text', name='comment')
+							br
+							input(type='hidden', name='serviceObject', value='CARGO_OPERATION')
+							input(type='hidden', name='vesselId', value=portCall.vessel.id)
+							input(type='hidden', name='state', value='serviceState')
+							input(type='submit', name="submit", id='submitButton')
 
-				div(class='rdyToSailOperation' class='operation')
-					h2 Ready-to-sail
-					form(action='/' + portCall.id, method='POST')
-						label(for='time_type') Timetype
-						br
-						select(name='timeType')
-							option(value="ESTIMATED") Estimated
-							option(value="ACTUAL") Actual
-							option(value="TARGET") Target
-							option(value="RECOMMENDED") Recommended
-						br
-						label(for='berth') Berth
-						br
-						input(type='text', name='berth')
-						br
-						label(for='datetime') Date
-						br
-						input(type='datetime-local', name='datetime')
-						br
-						label(for='comment') Comment
-						br
-						input(type='text', name='comment')
-						br
-						input(type='hidden', name='serviceObject', value='DEPARTURE_BERTH')
-						input(type='hidden', name='timeSequence', value='COMPLETED')
-						input(type='hidden', name='vesselId', value=portCall.vessel.id)
-						input(type='hidden', name='state', value='serviceState')
-						input(type='submit', name="submit", id='submitButton')
+					div(class='rdyToSailOperation' class='operation')
+						h3 Ready-to-sail
+						form(action='/' + portCall.id, method='POST')
+							label(for='time_type') Timetype
+							br
+							select(name='timeType')
+								option(value="ESTIMATED") Estimated
+								option(value="ACTUAL") Actual
+								option(value="TARGET") Target
+								option(value="RECOMMENDED") Recommended
+							br
+							label(for='berth') Berth
+							br
+							input(type='text', name='berth')
+							br
+							label(for='datetime') Date
+							br
+							input(type='datetime-local', name='datetime')
+							br
+							label(for='comment') Comment
+							br
+							input(type='text', name='comment')
+							br
+							input(type='hidden', name='serviceObject', value='DEPARTURE_BERTH')
+							input(type='hidden', name='timeSequence', value='COMPLETED')
+							input(type='hidden', name='vesselId', value=portCall.vessel.id)
+							input(type='hidden', name='state', value='serviceState')
+							input(type='submit', name="submit", id='submitButton')
 
-				div(class='slopOperation' class='operation')
-					h2 Slop operation
-					form(action='/' + portCall.id, method='POST')
-						label(for='timeSequence') Time sequence
-						br
-						select(name='timeSequence', id='timeSequence')
-							option(value='CONFIRMED') Confirm
-							option(value='DENIED') Deny
-						br
-						label(for='berth') Berth
-						br
-						input(type='text', name='berth')
-						br
-						label(for='comment') Comment
-						br
-						input(type='text', name='comment')
-						br
-						input(type='hidden', name='serviceObject', value='SLOP_OPERATION')
-						input(type='hidden', name='timeType', value='ACTUAL')
-						input(type='hidden', name='vesselId', value=portCall.vessel.id)
-						input(type='hidden', name='state', value='serviceState')
-						input(type='submit', name="submit", id='submitButton')
 
-				div(class='departureOperation' class='operation')
-					h2 Departure or arrival
-					form(action='/' + portCall.id, method='POST')
-						select(name='serviceObject')
-							option(value="DEPARTURE") Departure
-							option(value="ARRIVAL") Arrival
-						br
-						label(for='timeType') Time type
-						br
-						select(name='timeType')
-							option(value="ESTIMATED") Estimated
-							option(value="ACTUAL") Actual
-							option(value="TARGET") Target
-							option(value="RECOMMENDED") Recommended
-						br
-						label(for='berth') Berth
-						br
-						input(type='text', name='berth')
-						br
-						label(for='datetime') Date
-						br
-						input(type='datetime-local', name='datetime')
-						br
-						label(for='comment') Comment
-						br
-						input(type='text', name='comment')
-						br
-						input(type='hidden', name='vesselId', value=portCall.vessel.id)
-						input(type='hidden', name='state', value='locationState')
-						input(type='submit', name="submit", id='submitButton')
+
+					div(class='slopOperation' class='operation')
+						h3 Slop operation
+						form(action='/' + portCall.id, method='POST')
+							label(for='timeSequence') Time sequence
+							br
+							select(name='timeSequence', id='timeSequence')
+								option(value='CONFIRMED') Confirm
+								option(value='DENIED') Deny
+							br
+							label(for='berth') Berth
+							br
+							input(type='text', name='berth')
+							br
+							label(for='comment') Comment
+							br
+							input(type='text', name='comment')
+							br
+							input(type='hidden', name='serviceObject', value='SLOP_OPERATION')
+							input(type='hidden', name='timeType', value='ACTUAL')
+							input(type='hidden', name='vesselId', value=portCall.vessel.id)
+							input(type='hidden', name='state', value='serviceState')
+							input(type='submit', name="submit", id='submitButton')
+
+					div(class='departureOperation' class='operation')
+						h3 Departure or arrival
+						form(action='/' + portCall.id, method='POST')
+							select(name='serviceObject')
+								option(value="DEPARTURE") Departure
+								option(value="ARRIVAL") Arrival
+							br
+							label(for='timeType') Time type
+							br
+							select(name='timeType')
+								option(value="ESTIMATED") Estimated
+								option(value="ACTUAL") Actual
+								option(value="TARGET") Target
+								option(value="RECOMMENDED") Recommended
+							br
+							label(for='berth') Berth
+							br
+							input(type='text', name='berth')
+							br
+							label(for='datetime') Date
+							br
+							input(type='datetime-local', name='datetime')
+							br
+							label(for='comment') Comment
+							br
+							input(type='text', name='comment')
+							br
+							input(type='hidden', name='vesselId', value=portCall.vessel.id)
+							input(type='hidden', name='state', value='locationState')
+							input(type='submit', name="submit", id='submitButton')
 
 			div(class='allInfo')
 				h2 NOTES
@@ -138,8 +143,7 @@ block content
 						input(type='submit', name='submit', id='submitButton')
 				
 			div(class='listOfPCM')
-				h1 #{portCall.vessel.name}
-				h2 LATSET PORTCALLMESSAGE
+				h2 LATEST PORTCALL MESSAGES
 				div(class='latestPCM')
 					ul 					
 						- for (var i = 0; i < messages.length; i++) {
@@ -169,35 +173,45 @@ block content
 								- }
 							- }					
 						- }
-
 				br
-				h2 ALL PORTCALLMESSAGE
-				div(class='latestPCM')
-					ul 					
-						- for (var i = 0; i < oldMessages.length; i++) {
-							- var msg = oldMessages[i]
-							- var pcm = msg['ns2:portCallMessage']
-							- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
-								- var state = pcm['ns2:serviceState'][0]
-								- if (typeof state['ns2:at'] !== 'undefined')
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+				h2 ALL PORTCALL MESSAGES
+				div(class='latestPCMContainer')
+					div(class='latestPCM')
+						ul 					
+							- for (var i = 0; i < oldMessages.length; i++) {
+								- var msg = oldMessages[i]
+								- var pcm = msg['ns2:portCallMessage']
+								- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
+									- var state = pcm['ns2:serviceState'][0]
+									- if (typeof state['ns2:at'] !== 'undefined')
+										li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+									- else {
+										- var between = state['ns2:between'][0]
+										li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+									- }
+								- }
 								- else {
-									- var between = state['ns2:between'][0]
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- }
+									- var state = pcm['ns2:locationState'][0]
+									- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
+										- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+										- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+										li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+									- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
+										- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+										li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+									- } else {
+										- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+										li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+									- }
+								- }					
 							- }
-							- else {
-								- var state = pcm['ns2:locationState'][0]
-								- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
-									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
-									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- } else {
-									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- }
-							- }					
-						- }
+		footer(class='footer')
+			div(class='blueLine')
+			div(class='center')
+				div(class='contact')
+					h5 Terminal Siljaline
+					p DAT255 2017
+					a(href='https://github.com/hburden/DAT255' class='gitLink') GitHub/SiljaLine
+				div(class='contactRight')
+					img(class='iconsChalmers')
+					img(class='inconsWheel')

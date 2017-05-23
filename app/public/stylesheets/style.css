@@ -31,8 +31,9 @@
     line-height: 1;
     }
     ol, ul {
-    list-style: none;
+    list-style-type: none;
     }
+
     blockquote, q {
     quotes: none;
     }
@@ -73,8 +74,13 @@ header {
     margin-top: 44px;
     float: right;
     width: 470px;
+    height: 600px;
+    
 }
-
+.listOfvesselID{
+    overflow: auto;
+    height: 599px;
+}
 
 .portCall{
     background: url("pictures/boatBG.jpg");
@@ -94,16 +100,29 @@ header {
     overflow: hidden;
 }
 
+
 .listOfPCM {
       width: 470px;
       float: right;
-      margin-top: 44px;
+      margin-top: 32px;
+      margin-right: 25px;
 }
 .allInfo {
       width: 470px;
       height: 600px;
       float: right;
-      margin-top: 44px;
+      margin-top: 32px;
+}
+.boatName {
+    text-align:center;
+    text-shadow: 0px 2px 27px rgba(0,0,0, 0.12);
+    letter-spacing: 12px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 32px;
+
 }
 
 h1 {
@@ -112,10 +131,11 @@ h1 {
 }
 
 h2 {
+    text-align:center;
     display: inline;
     font-family: helvetica;
     font-size: 31px;
-    font-weight: bold;
+
     margin-top: 44px;
 }
 h3 {   
@@ -125,6 +145,11 @@ h3 {
 
 }
 
+h3 {
+    font-family: helvetica;
+    font-size: 22px;
+    font-weight: bold;
+}
 h4 {
     display: block;
     font-family: helvetica;
@@ -132,10 +157,18 @@ h4 {
     font-weight: bold;
     margin-top: 44px;
 }
-
-h2.Allh2 {
-    float right;
+h5 {
+    font-family: helvetica;
+    font-size: 16px;
+    font-stretch: 30;
+    font-weight: bold;
+    margin-top: 34px;
 }
+p {
+    margin-top: 8px;
+}
+
+
 
 .menue {
     padding-top: 24px;
@@ -181,7 +214,20 @@ a {
     margin-bottom: 5px;
     margin-top: -5px;
 }
+.iconsChalmers {
+    margin-top: 24px;
+    content:url("pictures/Chalmers.png");
+    float: right;
 
+}
+
+.contact {
+    float: left;
+}
+
+.contactRigth {
+    float: right;
+}
 .PCM{
     height: 300px;
     width: 470px;
@@ -190,14 +236,19 @@ a {
     padding-top: 5px;
     float: right;
 }
+.latestPCMContainer {
+    height: 300px;
 
+}
 .latestPCM {
-    
-    width: 470px;
+    height: 358px;
+    overflow: auto; 
+    width: 460px;
     background-color: #E9E9E9;
     border-radius: 5px;
     padding-top: 5px;
     float: left;
+    margin-bottom: 8px;
 }
 
 .MSG{
@@ -220,22 +271,30 @@ a {
     height: 300px;
 }
 
-
-
 ul {
     margin-top: 10px; 
 }
 .allOperations{
-    margin-top: 44px;
-    background-color: #F5F5F5;
+    margin-top: 32px;
+    width:240px;
     float: left;
     border-radius: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin-bottom: 8px;
+     border-radius: 5px;
+}
+.containerOperations {
+    background-color: #F5F5F5;
+    border-radius: 5px;
 }
 .operation {
-
-    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #F5F5F5;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 8px;
+}
+#operationsh2 {
+    margin-left: 18px;
 }
 
 
@@ -252,7 +311,32 @@ select {
     border-width: 1px;
     border-color: black;
 }
-.vesselID{
-    margin-top: 10px;
-    margin-right: 5px;
+
+
+.vesselID {
+margin-top: 10px;
+margin-right: 5px;
+
+}
+footer {
+    display: block;
+    background: #F3F3F3;
+    height: 150px;
+}
+.blueLine{
+    height: 8px;
+    width: 100%;
+    background-color: rgba(0,46,81,100); 
+    margin-top: 16px;
+}
+.gitLink {
+    margin-top: 8px;
+    float: left;
+    color: black;
+}
+.inconsWheel{
+    content:url("pictures/wheel.svg");
+    margin-right: 384px;
+    margin-top: 34px;
+    float: right;
 }

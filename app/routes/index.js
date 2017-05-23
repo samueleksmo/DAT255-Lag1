@@ -33,7 +33,7 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
     createQueue.newQueue(req.body.pid, function(qid){
-        insertPortCall.insertOneItem(req.body.pid, qid);
+        insertPortCall.insertOneItem(req.body.pid, qid, req.body.vname);
     })
     res.redirect('/');
 });

@@ -10,7 +10,7 @@ exports.newQueue = function(pId, callback) {
     '"}'+
   ']';
 
-var req = http.request(options.setOptions('/mb/mqs/', 'POST', 'application/json'), function(res) {
+var req = http.request(options.setOptions('/mb/mqs/?fromTime=2017-05-21T14:20:21Z', 'POST', 'application/json'), function(res) {
     var bodyChunks = [];
     console.log(res.statusCode);
     
