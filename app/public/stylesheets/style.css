@@ -229,27 +229,29 @@ a {
     float: right;
 }
 .PCM{
-    height: 300px;
+    height: 250px;
     width: 470px;
     background-color: white;
     border-radius: 5px;
     padding-top: 5px;
     float: right;
+    padding-left: -10px;
 }
 .latestPCMContainer {
     height: 300px;
 
 }
 .latestPCM {
-    height: 358px;
+    height: 467px;
     overflow: auto; 
     width: 460px;
-    background-color: #E9E9E9;
+    
+    background-color: rgba(233, 233, 233, .5);
     border-radius: 5px;
     padding-top: 5px;
     float: left;
     margin-bottom: 8px;
-}
+ }
 
 .MSG{
     margin-left: 16px;
@@ -263,6 +265,7 @@ a {
     padding-right: 5px;
     padding-left: 5px;
     border-radius: 5px;
+    background-color: rgba(233, 233, 233, .9);
 }
 
 .p{
@@ -280,23 +283,24 @@ ul {
     float: left;
     border-radius: 5px;
     margin-bottom: 8px;
-     border-radius: 5px;
+    border-radius: 5px;
 }
 .containerOperations {
-    background-color: #F5F5F5;
     border-radius: 5px;
+    background-color: rgba(245, 245, 245, .9);
 }
 .operation {
     border-radius: 5px;
-    background-color: #F5F5F5;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 5px;
     padding-top: 8px;
 }
 #operationsh2 {
-    margin-left: 18px;
+    margin-left: 7px;
 }
-
+#notesh2 {
+    margin-left: 8px;
+}
 
 input {
     border-width: 1px;
@@ -327,7 +331,7 @@ footer {
     height: 8px;
     width: 100%;
     background-color: rgba(0,46,81,100); 
-    margin-top: 16px;
+    
 }
 .gitLink {
     margin-top: 8px;
@@ -339,4 +343,14 @@ footer {
     margin-right: 384px;
     margin-top: 34px;
     float: right;
+}
+
+.deletePortcall {
+    color: black;
+}
+
+.notesContainer {
+    margin-left: 10px;
+    overflow: auto; 
+    height: 250px;
 }

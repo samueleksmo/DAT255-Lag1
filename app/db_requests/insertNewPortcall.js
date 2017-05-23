@@ -14,5 +14,6 @@ exports.insertOneItem= function(portcallid, queueid, vesselname) {
 			assert.equal(null,err);
 			db.close();
 		});
+	});
 };
 
