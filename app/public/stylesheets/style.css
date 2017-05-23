@@ -340,9 +340,9 @@ footer {
 }
 .inconsWheel{
     content:url("pictures/wheel.svg");
-    margin-right: 384px;
+    margin-left: 10px;
     margin-top: 34px;
-    float: right;
+    float: left;
 }
 
 .deletePortcall {
@@ -353,4 +353,8 @@ footer {
     margin-left: 10px;
     overflow: auto; 
     height: 250px;
+}
+
+.addedPortcalls {
+    margin-bottom: 30px;
 }
