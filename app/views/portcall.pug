@@ -1,3 +1,4 @@
+
 extends layout
 
 block content
@@ -161,20 +162,21 @@ block content
 							input(type='submit', name="submit", id='submitButton')
 
 			div(class='allInfo')
-				h2 NOTES
+				h2(id='notesh2') NOTES
 				div(class='PCM')
-					ul
-					each val in note
-						p= val
+					div(class='notesContainer')
+						ul
+						each val in note
+							p= val
+							br
 
-
-					form(action='/' + portCall.id, method='POST')
-						label(for='note') New note
-						br
-						textarea(rows='7', cols='50', name='note')
-						br
-						input(type='hidden', name='state', value='note')
-						input(type='submit', name='submit', id='submitButton')
+				form(action='/' + portCall.id, method='POST')
+					label(for='note') New note
+					br
+					textarea(rows='7', cols='74', name='note')
+					br
+					input(type='hidden', name='state', value='note')
+					input(type='submit', name='submit', id='submitButton')
 				
 			div(class='listOfPCM')
 				h2 LATEST PORTCALL MESSAGES
@@ -245,7 +247,7 @@ block content
 				div(class='contact')
 					h5 Terminal Siljaline
 					p DAT255 2017
-					a(href='https://github.com/hburden/DAT255' class='gitLink') GitHub/SiljaLine
+					a(href='https://github.com/samueleksmo/DAT255-Lag1' class='gitLink') GitHub/SiljaLine
 				div(class='contactRight')
 					img(class='iconsChalmers')
 					img(class='inconsWheel')
