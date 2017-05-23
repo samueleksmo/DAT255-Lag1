@@ -38,7 +38,6 @@ var body = '<?xml version="1.0" encoding="UTF-8"?>' +
       arrivalOrDeparture(arrOrDep, berth) + 
    '</ns2:locationState>' +
 '</ns2:portCallMessage>';
-console.log(body);
 
 var req = http.request(options.setOptions('/mb/mss', 'POST', 'application/xml'), function(res)    {
     console.log(res.statusCode);

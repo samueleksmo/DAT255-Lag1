@@ -11,10 +11,12 @@ block content
 					ul
 					each val in portCalls
 						li 
+							
 							p #{val.vesselName}
 							a(href='/' + val.portCallId)= val.portCallId
-							
-							
+							br
+							a(href='#', class='deletePortcall', data-id=val.portcallid) Delete
+              
 				h2 Add a new port call
 				form(action='/', method='POST')
 					label(for='vname') Vessel name

@@ -7,7 +7,7 @@ var url = 'mongodb://localhost:27017/test';
 exports.getQueueId = function(portcallid, callback) {
  mongo.connect(url, function(err,db){
  	if (err) throw err;
-	db.collection('ourportcalls').findOne({portCallId : portcallid}, function(err,doc){
+	db.collection('ourportcalls').findOne({portcallid : portcallid}, function(err,doc){
 		callback(doc.queueId);
 		db.close();
 	});
