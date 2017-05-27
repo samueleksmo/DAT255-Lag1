@@ -9,7 +9,7 @@ block content
 				div(class='containerOperations')
 					div(class='cargo' class='operation')
 						h3 Cargo operation
-						form(action='/' + portCall.id, method='POST' class='cargoForm')
+						form(action='/portcall/' + portCall.id, method='POST' class='cargoForm')
 							label(for='timeSequence') Time sequence
 							br
 							select(name='timeSequence', id='timeSequence')
@@ -43,7 +43,7 @@ block content
 
 					div(class='bunkering' class='operation')
 						h3 Bunkering operation
-						form(action='/' + portCall.id, method='POST' class='bunkeringForm')
+						form(action='/portcall/' + portCall.id, method='POST' class='bunkeringForm')
 							label(for='timeSequence') Time sequence
 							br
 							select(name='timeSequence', id='timeSequence')
@@ -77,7 +77,7 @@ block content
 
 					div(class='rdyToSailOperation' class='operation')
 						h3 Ready-to-sail
-						form(action='/' + portCall.id, method='POST')
+						form(action='/portcall/' + portCall.id, method='POST')
 							label(for='time_type') Timetype
 							br
 							select(name='timeType')
@@ -108,7 +108,7 @@ block content
 
 					div(class='slopOperation' class='operation')
 						h3 Slop operation
-						form(action='/' + portCall.id, method='POST')
+						form(action='/portcall/' + portCall.id, method='POST')
 							label(for='timeSequence') Time sequence
 							br
 							select(name='timeSequence', id='timeSequence')
@@ -131,7 +131,7 @@ block content
 
 					div(class='departureOperation' class='operation')
 						h3 Departure or arrival
-						form(action='/' + portCall.id, method='POST')
+						form(action='/portcall/' + portCall.id, method='POST')
 							select(name='serviceObject')
 								option(value="DEPARTURE") Departure
 								option(value="ARRIVAL") Arrival
@@ -162,14 +162,14 @@ block content
 
 			div(class='allInfo')
 				h2(id='notesh2') NOTES
-				div(class='PCM')
+				div(class='notes')
 					div(class='notesContainer')
 						ul
-						each val in note
+						each val in notes
 							p= val
 							br
 
-				form(action='/' + portCall.id, method='POST')
+				form(action='/portcall/' + portCall.id, method='POST')
 					label(for='note') New note
 					br
 					textarea(rows='7', cols='74', name='note')
@@ -177,76 +177,45 @@ block content
 					input(type='hidden', name='state', value='note')
 					input(type='submit', name='submit', id='submitButton')
 				
+			//Lists port call messages
+			mixin listMessages(messages)
+				- for (var i = 0; i < messages.length; i++) {
+					- var msg = messages[i]
+					- var pcm = msg['ns2:portCallMessage']
+					- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
+						- var state = pcm['ns2:serviceState'][0]
+						- if (typeof state['ns2:at'] !== 'undefined')
+							li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+						- else {
+							- var between = state['ns2:between'][0]
+							li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+						- }
+					- }
+					- else {
+						- var state = pcm['ns2:locationState'][0]
+						- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
+							- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+							- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+							li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
+						- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
+							- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
+							li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+						- } else {
+							- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
+							li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
+						- }
+					- }					
+				- }
+
 			div(class='listOfPCM')
 				h2 LATEST PORTCALL MESSAGES
-				div(class='latestPCM')
-					ul 					
-						- for (var i = 0; i < messages.length; i++) {
-							- var msg = messages[i]
-							- var pcm = msg['ns2:portCallMessage']
-							- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
-								- var state = pcm['ns2:serviceState'][0]
-								- if (typeof state['ns2:at'] !== 'undefined')
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- else {
-									- var between = state['ns2:between'][0]
-									li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- }
-							- }
-							- else {
-								- var state = pcm['ns2:locationState'][0]
-								- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
-									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} 
-								- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
-									- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- } else {
-									- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-									li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-								- }
-							- }					
-						- }
+				div(class='PCM')
+					ul
+						+listMessages(latestMessages) 					
+						
 				br
 				h2 ALL PORTCALL MESSAGES
-				div(class='latestPCMContainer')
-					div(class='latestPCM')
+				div(class='PCMContainer')
+					div(class='PCM')
 						ul 					
-							- for (var i = 0; i < oldMessages.length; i++) {
-								- var msg = oldMessages[i]
-								- var pcm = msg['ns2:portCallMessage']
-								- if (typeof pcm['ns2:serviceState'] !== 'undefined') {
-									- var state = pcm['ns2:serviceState'][0]
-									- if (typeof state['ns2:at'] !== 'undefined')
-										li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> #{state['ns2:at'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-									- else {
-										- var between = state['ns2:between'][0]
-										li(class='MSG') #{state['ns2:serviceObject']} #{state['ns2:timeSequence']}  <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> From #{between['ns2:from'][0]['ns2:locationMRN'][0].substring(27)} to #{between['ns2:to'][0]['ns2:locationMRN'][0].substring(27)} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-									- }
-								- }
-								- else {
-									- var state = pcm['ns2:locationState'][0]
-									- if (typeof state['ns2:departureLocation'] !== 'undefined' && typeof state['ns2:arrivalLocation'] !== 'undefined') {
-										- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-										- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-										li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} and arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-									- } else if (typeof state['ns2:departureLocation'] !== 'undefined') {
-										- var depFrom = (state['ns2:departureLocation'][0]['ns2:from'][0])
-										li(class='MSG') #{state['ns2:referenceObject']} departs from  #{depFrom['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-									- } else {
-										- var arrTo = (state['ns2:arrivalLocation'][0]['ns2:to'][0])
-										li(class='MSG') #{state['ns2:referenceObject']} arrives to #{arrTo['ns2:locationMRN'][0].substring(27)} <br> #{state['ns2:timeType']} time: #{state['ns2:time']} <br> Reported at: #{pcm['ns2:reportedAt']} by #{pcm['ns2:reportedBy']} <br> Comment: #{pcm['ns2:comment']}
-									- }
-								- }					
-							- }
-		footer(class='footer')
-			div(class='blueLine')
-			div(class='center')
-				div(class='contact')
-					h5 Terminal Siljaline
-					p DAT255 2017
-					a(href='https://github.com/samueleksmo/DAT255-Lag1' class='gitLink') GitHub/SiljaLine
-				div(class='contactRight')
-					img(class='iconsChalmers')
-					img(class='inconsWheel')
+							+listMessages(allMessages)

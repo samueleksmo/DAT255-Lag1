@@ -3,8 +3,8 @@ var assert = require('assert');
 var url = 'mongodb://localhost:27017/test';
 
 
-
-exports.insertOneItem = function(portcallid, portcallmessage) {
+//Adds a new port call message associated with a specified port call id in the database
+exports.insertPortCallMessage = function(portcallid, portcallmessage) {
 mongo.connect(url, function(err,db){
 	myobj = { portcallid: portcallid, portcallmessage: portcallmessage };
 	if (err) throw err;

@@ -1,25 +1,21 @@
 var http = require('http');
 var options = require('./options.js');
 
-//hämtar meddelanden för en viss kö, genom att skicka med queueId för ett visst anlöp
-exports.newQueueMessages = function(qId, callback) {
+//Fetches messages from a queue by specifing the queue id
+exports.getQueueMessages = function(qid, callback) {
 
 
-var req = http.get(options.setOptions('/mb/mqs/'+ qId, 'GET', 'application/xml'), function(res) {
+	var req = http.get(options.setOptions('/mb/mqs/'+ qid, 'GET', 'application/xml'), function(res) {
 
-  var bodyChunks = [];
+		var bodyChunks = [];
 
-  res.on('data', function(chunk) {
+		res.on('data', function(chunk) {
+    		bodyChunks += chunk;
+		});
 
-    bodyChunks += chunk;
-
-  });
-
-  res.on('end', function() {
-    
-      callback(bodyChunks);
-
-    });
+		res.on('end', function() {
+    		callback(bodyChunks);
+		});
 
    });
 

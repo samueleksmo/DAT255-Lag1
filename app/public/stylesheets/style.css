@@ -77,7 +77,7 @@ header {
     height: 600px;
     
 }
-.listOfvesselID{
+.listOfVessels{
     overflow: auto;
     height: 599px;
 }
@@ -228,7 +228,7 @@ a {
 .contactRigth {
     float: right;
 }
-.PCM{
+.notes{
     height: 250px;
     width: 470px;
     background-color: white;
@@ -237,11 +237,11 @@ a {
     float: right;
     padding-left: -10px;
 }
-.latestPCMContainer {
+.PCMContainer {
     height: 300px;
 
 }
-.latestPCM {
+.PCM {
     height: 467px;
     overflow: auto; 
     width: 460px;
@@ -317,7 +317,7 @@ select {
 }
 
 
-.vesselID {
+.vesselName {
 margin-top: 10px;
 margin-right: 5px;
 
