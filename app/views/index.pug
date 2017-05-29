@@ -5,15 +5,15 @@ block content
 		div(class='center')
 			div(class='addPortID')
 				h1 Added port calls
-				if portCalls.length == 0
-					p There are currently no portcalls
+				if addedPortCalls.length == 0
+					p There are currently no portcalls added
 				else
 					ul(class='addedPortcalls')
-						each val in portCalls
+						each val in addedPortCalls
 							li 
 								br
-								h5(class='vesselID') #{val.vesselName}
-								a(href='/' + val.portcallid)= val.portcallid
+								h5(class='vesselName') #{val.vesselName}
+								a(href='/portcall/' + val.portcallid)= val.portcallid
 								br
 								a(href='#', class='deletePortcall', data-id=val.portcallid) Delete
 								br
@@ -33,22 +33,12 @@ block content
 			div(class='latestCalls')
 				h1 Latest port calls
 
-				div(class='listOfvesselID')
-					if portCalls30.length == 0
+				div(class='listOfVessels')
+					if latestPortCalls.length == 0
 						p There are currently no portcalls
 					else
 						ul
-							each val in portCalls30
+							each val in latestPortCalls
 								li(class='vesselID')
 									h5 #{val.vessel.name}
 									| #{val.id}
-	footer(class='footer')
-		div(class='blueLine')
-		div(class='center')
-			div(class='contact')
-				h5 Terminal Siljaline
-				p DAT255 2017
-				a(href='https://github.com/hburden/DAT255' class='gitLink') GitHub/SiljaLine
-			div(class='contactRight')
-				img(class='iconsChalmers')
-				img(class='inconsWheel')

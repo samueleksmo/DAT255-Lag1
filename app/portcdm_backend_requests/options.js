@@ -1,5 +1,6 @@
-  exports.setOptions = function (thePath, theMethod, content) {
-    return {
+//Sets options for connectiing to the back end
+exports.setOptions = function (thePath, theMethod, content) {
+  return {
     host: 'sandbox-5.portcdm.eu',
     port: 8080,
     path: thePath,
@@ -10,5 +11,5 @@
       'X-PortCDM-APIKey': 'dhc',
       'Content-Type': content
     }
-  }
   };
+};
