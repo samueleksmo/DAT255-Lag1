@@ -4,7 +4,7 @@ block content
 	div(class='home')
 		div(class='center')
 			div(class='addPortID')
-				h1 Added port calls
+				h1 ADDED PORTCALLS
 				if addedPortCalls.length == 0
 					p There are currently no portcalls added
 				else
@@ -18,7 +18,7 @@ block content
 								a(href='#', class='deletePortcall', data-id=val.portcallid) Delete
 								br
               
-				h2 Add a new port call
+				h2 ADD A NEW PORTCALL
 				form(action='/', method='POST')
 					label(for='vname') Vessel name
 					br
@@ -31,7 +31,7 @@ block content
 					input(type='submit', name="submit", id='submitButton')
 
 			div(class='latestCalls')
-				h1 Latest port calls
+				h1 LATEST PORTCALLS
 
 				div(class='listOfVessels')
 					if latestPortCalls.length == 0
