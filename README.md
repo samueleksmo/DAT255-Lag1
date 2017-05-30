@@ -7,15 +7,23 @@ The project has followed Scrum methodology, and Trello was used as a scrum board
 https://trello.com/dat2551
 More information about how Scrum was used during the project can be found in the document Reflektionsrapport.
 
-In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which findBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
+In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which FindBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
 
 GUIDE: HOW TO START THE WEB APPLICATION
 
-1.First of all you need to have nodeJS, npm and expressJS installed. Download NodeJs from this link:
+1.First of all you need to have nodeJS, npm, expressJS and nodemon installed. Download NodeJS from this link (npm is included in the download):
 https://nodejs.org/en/
-Thereafter, follow this guide: 
-https://www.tutorialspoint.com/expressjs/expressjs_environment.htm 
-You only need to do the steps described in the page that is linked, where the last command is 
+
+To make sure the installation went through type the following in your terminal
+node --version
+npm --version
+
+Which should give you an ouput that looks something like
+v5.0.0
+3.5.2
+
+Therafter run the following commands
+npm install --save express
 npm install -g nodemon
 
 2.The second step is to set up the database. In this application MongoDB is used. Download the correct version of MongoDB for your operating system from the Community Server from the following link:
@@ -23,13 +31,13 @@ https://www.mongodb.com/download-center?jmp=nav
 Start the database by navigating into the "bin" folder in your downloaded MongoDB and run the command
 mongod
 
-(If you need more help regarding installing and starting MongoDB this video guide describes the process in detail:https://www.youtube.com/watch?v=3fj9sx7UXfE&index=14&list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR )
+(It might complain about not finding a place to store the data, since MongoDB comes prepared to store data in a folder at c:/data/db. If you don´t have a folder like that you can just create one and it should be fine. If you need more help regarding installing and starting MongoDB this video guide describes the process in detail: https://www.youtube.com/watch?v=3fj9sx7UXfE&index=14&list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR )
 
 
 3.Now you can download or clone this repository from GitHub.
 
 
-4.When you have this repository on your computer and the database is running, navigate into the “app” folder with the command line. Thereafter type
+4.When you have this repository on your computer and the database is running in one terminal, open a new terminal and navigate into the “app” folder from this repository. Thereafter type the command
 nodemon app
 This should start the application
 
