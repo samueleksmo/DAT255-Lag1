@@ -1,5 +1,6 @@
 //Sets options for connectiing to the back end
 exports.setOptions = function (thePath, theMethod, content) {
+  "use strict";
   return {
     host: 'sandbox-5.portcdm.eu',
     port: 8080,

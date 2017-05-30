@@ -3,6 +3,7 @@ var options = require('./options.js');
 
 //Creates a new queue, filtered by a specified port call id, add returns a queue id
 exports.newQueue = function(pId, callback) {
+  "use strict";
   var body = '[' +
     '{' +
       '"type": "PORT_CALL",' +

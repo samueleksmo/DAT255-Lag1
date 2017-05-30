@@ -3,9 +3,9 @@ var options = require('./options.js');
 
 //Fetches messages from a queue by specifing the queue id
 exports.getQueueMessages = function(qid, callback) {
+	"use strict";
 
-
-	var req = http.get(options.setOptions('/mb/mqs/'+ qid, 'GET', 'application/xml'), function(res) {
+	http.get(options.setOptions('/mb/mqs/'+ qid, 'GET', 'application/xml'), function(res) {
 
 		var bodyChunks = [];
 
