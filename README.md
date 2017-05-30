@@ -4,13 +4,14 @@ In this repository you can find documents and code created by the team SiljaLine
 The main project in the course has been to create an application which makes it easier for terminals in harbours to use PortCDM (for more info about PortCDM visit http://stmvalidation.eu/stm-validation/#!activity-item/activity-1-port-collaborative-decision-making). Below you can find a guide on how to start the web application.
 
 The project has followed Scrum methodology, and Trello was used as a scrum board. To see the product and sprint backlogs please follow this link:
-https://trello.com/dat2551 (OBS PRODUCT BACKLOG SAKNAS). More information about how Scrum was used during the project can be found in the document Reflektionsrapport.
+https://trello.com/dat2551
+More information about how Scrum was used during the project can be found in the document Reflektionsrapport.
 
-In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which findBugs does not cover. Instead JSLint was used for cotrolling the code quality. For more information see the section about testing in the Reflektionsrapport. 
+In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which findBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
 
 GUIDE: HOW TO START THE WEB APPLICATION
 
-1.First of all you need to have nodeJs, npm and expressJS installed. Download NodeJs from this link:
+1.First of all you need to have nodeJS, npm and expressJS installed. Download NodeJs from this link:
 https://nodejs.org/en/
 Thereafter, follow this guide: 
 https://www.tutorialspoint.com/expressjs/expressjs_environment.htm 
