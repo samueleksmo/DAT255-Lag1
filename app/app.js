@@ -5,7 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var portCall = require('./routes/portCall')
+var portCall = require('./routes/portCall');
 
 var app = express();
 
@@ -21,18 +21,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', index);
-app.use('/portcall', portCall)
+app.use('/portcall', portCall);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(next) {
+	"use strict";
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
+  "use strict";
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

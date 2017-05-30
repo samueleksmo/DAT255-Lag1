@@ -4,18 +4,19 @@ var options = require('./options.js');
 
 
 function arrivalOrDeparture(arrOrDep, berth) {
+  "use strict";
   if (arrOrDep==="ARRIVAL") {
     return '<ns2:arrivalLocation>' +
       '<ns2:to>' + 
         '<ns2:locationMRN>urn:mrn:stm:location:segot:BERTH:'+berth+'</ns2:locationMRN>' +
       '</ns2:to>' +
-    '</ns2:arrivalLocation>'
-  } else {
+    '</ns2:arrivalLocation>';
+  }else{
     return '<ns2:departureLocation>' +
       '<ns2:from>' + 
         '<ns2:locationMRN>urn:mrn:stm:location:segot:BERTH:'+berth+'</ns2:locationMRN>' +
       '</ns2:from>' +
-    '</ns2:departureLocation>'
+    '</ns2:departureLocation>';
   }
 }
 
@@ -24,6 +25,7 @@ d.setHours(d.getHours());
 
 //Posts a location state to the back end
 exports.newLocationState = function(portCallId, vesselId, timeType, datetime, arrOrDep, berth, comment) {
+  "use strict";
   var body = '<?xml version="1.0" encoding="UTF-8"?>' +
   '<ns2:portCallMessage xmlns:ns2="urn:mrn:stm:schema:port-call-message:0.6">' +
      '<ns2:portCallId>'+portCallId+'</ns2:portCallId>' +

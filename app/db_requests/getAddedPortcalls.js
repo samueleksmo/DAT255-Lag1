@@ -1,4 +1,3 @@
-var express = require('express');
 var mongo = require('mongodb').MongoClient;
 var assert = require('assert');
 var url = 'mongodb://localhost:27017/test';
@@ -6,6 +5,7 @@ var url = 'mongodb://localhost:27017/test';
 
 //Returns all port calls from the database
 exports.getAddedPortcalls= function(callback) {
+  'use strict';
   var resultArray = [];
   mongo.connect(url, function(err, db) {
     assert.equal(null, err);

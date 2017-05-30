@@ -1,9 +1,11 @@
+/*jslint es6 */
 var http = require('http');
 const uuidV4 = require('uuid/v4');
 var options = require('./options.js');
 
 //Posts a service state to the back end
 exports.newServiceState = function(portCallId, vesselId, timeType, datetime, serviceObject, timeSequence, berth, comment) {
+  "use strict";
   var d = new Date();
   d.setHours(d.getHours());
   var body = '<?xml version="1.0" encoding="UTF-8"?>' +
