@@ -6,7 +6,7 @@ The main project in the course has been to create an application which makes it 
 The project has followed Scrum methodology, and Trello was used as a scrum board. To see the product and sprint backlogs please follow this link:
 https://trello.com/dat2551 (OBS PRODUCT BACKLOG SAKNAS). More information about how Scrum was used during the project can be found in the document Reflektionsrapport.
 
-
+In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which findBugs does not cover. Instead JSLint was used for cotrolling the code quality. For more information see the section about testing in the Reflektionsrapport. 
 
 GUIDE: HOW TO START THE WEB APPLICATION
 
