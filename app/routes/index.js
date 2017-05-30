@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router = new express.Router();
 
 var getPortCalls = require('../portcdm_backend_requests/getPortCalls.js');
 var createQueue = require('../portcdm_backend_requests/createQueue.js');
@@ -9,7 +9,8 @@ var addPortCall = require('../db_requests/insertPortcall.js');
 var deletePortCall = require('../db_requests/deletePortcall.js');
 
 //Renders latest and added port calls to front end
-router.get('/', function(req, res){
+router.get('/', function(ignore, res){
+    'use strict';
     getPortCalls.getPortCalls(function(latestPortCalls){
         getAddedPortCalls.getAddedPortcalls(function(addedPortCalls){
             res.render('index', { latestPortCalls: latestPortCalls, addedPortCalls: addedPortCalls });    
@@ -19,6 +20,7 @@ router.get('/', function(req, res){
 
 //Creates a new queue and adds a new port call to the data base
 router.post('/', function(req, res){
+    'use strict';
     createQueue.newQueue(req.body.pid, function(qid){
         addPortCall.insertPortCall(req.body.pid, qid, req.body.vname);
     });
@@ -27,6 +29,7 @@ router.post('/', function(req, res){
 
 //Deletes a port call from the data base
 router.delete('/:id', function(req,res){
+    'use strict';
     deletePortCall.deletePortCall(req.params.id);
     res.redirect('/');
 });
