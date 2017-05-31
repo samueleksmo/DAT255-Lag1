@@ -1,6 +1,6 @@
-# DAT255-Lag1
+# DAT255 - Lag Silja Line
 
-In this repository you can find documents and code created by the team SiljaLine during the course DAT255 in the spring of 2017.
+In this repository you can find documents and code created by the team Silja Line during the course DAT255 in the spring of 2017.
 The main project in the course has been to create an application which makes it easier for terminals in harbours to use PortCDM (for more info about PortCDM visit http://stmvalidation.eu/stm-validation/#!activity-item/activity-1-port-collaborative-decision-making). 
 
 # Web application
