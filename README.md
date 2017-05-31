@@ -15,6 +15,8 @@ The project has followed Scrum methodology, and Trello was used as a scrum board
 
 In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which FindBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
 
+# Guide: How to run the web application locally
+
 1.First of all you need to have nodeJS, npm, expressJS and nodemon installed. Download NodeJS from this link (npm is included in the download):
 https://nodejs.org/en/
 
