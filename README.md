@@ -3,13 +3,17 @@
 In this repository you can find documents and code created by the team SiljaLine during the course DAT255 in the spring of 2017.
 The main project in the course has been to create an application which makes it easier for terminals in harbours to use PortCDM (for more info about PortCDM visit http://stmvalidation.eu/stm-validation/#!activity-item/activity-1-port-collaborative-decision-making). 
 
+# Web application
+
 The web application is running at: https://siljaline.herokuapp.com/. The app is running using free dynos from Heroku. You might therefore experience speed issues. However if the site is down (due to e.g. an application error) or if you are experiencing any other issue, please contact one of the developers at: mark.henriksson123@gmail.com. Note that an application error might occur as a result of a portcall being cancelled. If you wish to run the application on you local machine, please follow the guide below. For more information regarding the web application, see the document Reflektionsrapport. 
+
+# Trello
 
 The project has followed Scrum methodology, and Trello was used as a scrum board. To see the product and sprint backlogs please follow this link: https://trello.com/dat2551. More information about how Scrum was used during the project can be found in the document Reflektionsrapport.
 
-In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which FindBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
+# Testing
 
-Guide: How to run the web application locally
+In the course it was also requested that the code for the application was checked with FindBugs. This was not possible for the application in this repository, since JavaScript was chosen as programming language, which FindBugs does not cover. Instead JSLint was used for controlling the code quality. For more information see the section about testing in the document Reflektionsrapport. 
 
 1.First of all you need to have nodeJS, npm, expressJS and nodemon installed. Download NodeJS from this link (npm is included in the download):
 https://nodejs.org/en/
