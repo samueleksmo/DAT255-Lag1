@@ -6,7 +6,7 @@ block content
 			div(class='addPortID')
 				h1 ADDED PORTCALLS
 				if addedPortCalls.length == 0
-					p There are currently no portcalls added
+					p(class='noPortcalls') There are currently no portcalls added
 				else
 					ul(class='addedPortcalls')
 						each val in addedPortCalls
